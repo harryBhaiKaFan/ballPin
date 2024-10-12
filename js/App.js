@@ -1,6 +1,5 @@
 import { Game } from "./Game.js";
 
-
 const screen = document.querySelector("#screen");
 
 const App = {

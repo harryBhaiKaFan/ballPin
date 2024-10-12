@@ -13,11 +13,14 @@ html,body
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(rgb(138, 62, 0),rgb(208, 87, 0));
 }
 
 #screen
 {
+    opacity: 0.8;
     height:min(1280px,100%);
-    width:min(720px,100%);
-    outline: 1px solid red;
+    touch-action: none;
+    width:310px;
+    background: transparent;
 }

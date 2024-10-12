@@ -1,22 +1,35 @@
 
 import { Sound } from "./Sound.js";
-
+import { Board } from "./Board.js";
+import { Ball } from "./Ball.js";
 
 export const Game = {
     SCREEN:null,
     CTX:null,
+    lastTm:null,
+    DELAY: 17,
     init: function({screen,sound}){
         this.SCREEN = screen;
+        this.SCREEN.height = parseInt(getComputedStyle(this.SCREEN).height);
+        this.SCREEN.width = parseInt(getComputedStyle(this.SCREEN).width);
         this.CTX = screen.getContext("2d");
-
-        console.log(this.CTX);
-        if (sound) {
-            Sound.init();
-        }
         
+        if (sound)  Sound.init();
+        
+        Board.init(screen);
+        Ball.init(screen);
+
+        this.render(null);
     },
 
-    render: function(){
+    render: function(currTm){
+        requestAnimationFrame(this.render.bind(this));
+        if (currTm - this.lastTm < this.DELAY) return;
+        this.CTX.clearRect(0,0,this.SCREEN.width,this.SCREEN.height)
+
+        Board.render(this.CTX);
+        Ball.render(this.CTX);
         
+        this.lastTm = currTm;
     }
 };
